@@ -40,9 +40,12 @@ require('dotenv').config()
 client.login(process.env.BOT_TOKEN);
 
 client.on("messageCreate", async (message) => {
-  if (message.content === "e+hi") {
+
+  const prefix = "e+"
+
+  if (message.content === prefix + "ping") {
     message.reply({
-      content: "hi!",
+      content: `Websocket: ${client.ws.ping}\nAPI Endpoint ${Date.now() - message.createdTimestamp}`,
       allowedMentions: { parse: [] }
     })
   }
