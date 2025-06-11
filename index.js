@@ -51,13 +51,20 @@ const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-  const filePath = path.join(commandsPath, file);
-  const command = require(filePath);
-  if ('data' in command && 'execute' in command) {
-    client.commands.set(command.data.name, command);
-  } else {
-    console.warn(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
-  }
+    const filePath = path.join(commandsPath, file);
+    const command = require(filePath);
+
+    if ('data' in command && 'name' in command.data && 'execute' in command) {
+        client.commands.set(command.data.name, command);
+
+        if (command.aliases && Array.isArray(command.aliases)) {
+            for (const alias of command.aliases) {
+                client.commands.set(alias, command);
+            }
+        }
+    } else {
+        console.warn(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property, or "data.name".`);
+    }
 }
 
 
@@ -77,6 +84,9 @@ function mathEvaluate(expression) {
 const prefix = "e+"
 
 client.on('messageCreate', async message => {
+
+  if (message.channel.type === ChannelType.DM) return
+
   //command 
   if (!message.author.bot && message.content.startsWith(prefix)) {
 
