@@ -51,20 +51,20 @@ const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
+  const filePath = path.join(commandsPath, file);
+  const command = require(filePath);
 
-    if ('data' in command && 'name' in command.data && 'execute' in command) {
-        client.commands.set(command.data.name, command);
+  if ('data' in command && 'name' in command.data && 'execute' in command) {
+    client.commands.set(command.data.name, command);
 
-        if (command.aliases && Array.isArray(command.aliases)) {
-            for (const alias of command.aliases) {
-                client.commands.set(alias, command);
-            }
-        }
-    } else {
-        console.warn(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property, or "data.name".`);
+    if (command.aliases && Array.isArray(command.aliases)) {
+      for (const alias of command.aliases) {
+        client.commands.set(alias, command);
+      }
     }
+  } else {
+    console.warn(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property, or "data.name".`);
+  }
 }
 
 
@@ -88,21 +88,21 @@ client.on('messageCreate', async message => {
   if (message.channel.type === ChannelType.DM) return
 
   //command 
+  //command 
   if (!message.author.bot && message.content.startsWith(prefix)) {
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
 
-    const command = client.commands.get(commandName);
+    let command = client.commands.get(commandName); // ← let に変更！
 
-     if (!command) {
-        command = client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+    if (!command) {
+      command = client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     }
 
     if (!command) {
-        return message.reply({ content: "コマンドが見つかりませんでした", allowedMentions: { parent: [] } });
+      return message.reply({ content: "コマンドが見つかりませんでした", allowedMentions: { parent: [] } });
     }
-
 
     try {
       await command.execute(client, message, args);
@@ -118,6 +118,7 @@ client.on('messageCreate', async message => {
       message.reply({ content: "えらった！", allowedMentions: { parent: [] } });
     }
   }
+
 
   if (message.content.startsWith("?") && message.content !== "?") { // mathjs
     try {
