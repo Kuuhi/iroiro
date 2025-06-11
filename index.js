@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Partials, Collection, ChannelType } = require('discord.js');
+const { Client, GatewayIntentBits, Partials, Collection, ChannelType, EmbedBuilder } = require('discord.js');
 
 const client = new Client({
   intents: [

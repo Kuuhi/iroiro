@@ -1,3 +1,5 @@
+// commands/help
+
 module.exports = {
   data: {
     name: 'help',
@@ -7,7 +9,6 @@ module.exports = {
 
   async execute(client, message, args) {
     const { commands } = message.client;
-
     const commandList = commands.map(command => {
       return `\`${command.data.name}\`: ${command.data.description || '-'}`;
     }).join('\n');
