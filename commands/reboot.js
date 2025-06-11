@@ -1,7 +1,7 @@
 module.exports = {
   data: {
     name: 'reboot',
-    description: '(管理者)ボットを再起動します（PM2が自動的に起動します）。',
+    description: '(管理者)process.exit()を呼び出す',
   },
 
   adminIds: ["777466773955936266"],
