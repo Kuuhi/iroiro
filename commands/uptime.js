@@ -3,7 +3,7 @@
 module.exports = {
   data: {
     name: 'uptime',
-    description: 'ボットが起動した時刻と稼働時間を表示します。',
+    description: 'ボットが起動した時刻と稼働時間を表示します',
   },
 
   async execute(client, message) {
@@ -54,7 +54,7 @@ module.exports = {
 
     // --- 返信メッセージの作成 ---
     await message.reply({
-      content: `ボットは **${formattedStartupTime}** に起動しました。\n稼働時間: **${uptimeString}**`,
+      content: `ボットは ${formattedStartupTime} に起動しました。\n稼働時間: ${uptimeString} (<t:${now}:R>)`,
       allowedMentions: { parse: [] }
     });
   },
