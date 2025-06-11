@@ -88,7 +88,7 @@ client.on('messageCreate', async message => {
     if (!command) return message.reply({ content: "コマンドが見つかりませんでした", allowedMentions: { parent: [] } });
 
     try {
-      await command.execute(message, args);
+      await command.execute(client, message, args);
     } catch (error) {
       console.error(error);
       if (message.member.id === "777466773955936266") {

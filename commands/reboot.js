@@ -6,7 +6,7 @@ module.exports = {
 
   adminIds: ["777466773955936266"],
 
-  async execute(message) {
+  async execute(client, message) {
     if (!this.adminIds.includes(message.author.id)) return
     await message.react("✅")
     process.exit(0);

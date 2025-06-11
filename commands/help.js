@@ -4,7 +4,7 @@ module.exports = {
     description: '利用可能なコマンドを表示します',
   },
 
-  async execute(message, args) {
+  async execute(client, message, args) {
     const { commands } = message.client;
 
     const commandList = commands.map(command => {

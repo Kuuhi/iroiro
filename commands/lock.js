@@ -4,7 +4,7 @@ module.exports = {
     description: '(管理者)チャンネルをロックします',
   },
 
-  async execute(message) {
+  async execute(client, message) {
 
     if (message.member.roles.cache.has("1062875133703888896")) {
       return await message.reply({
