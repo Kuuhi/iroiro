@@ -1,3 +1,5 @@
+// commands/reboot.js
+
 module.exports = {
   data: {
     name: 'reboot',
@@ -6,9 +8,10 @@ module.exports = {
 
   adminIds: ["777466773955936266"],
 
-  async execute(client, message) {
+  async execute(client, message, args) {
     if (!this.adminIds.includes(message.author.id)) return
     await message.react("✅")
-    process.exit(0);
+    const exitCode = Number(args[0]) || 0;
+    process.exit(exitCode);
   },
 };
