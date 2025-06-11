@@ -54,7 +54,7 @@ module.exports = {
 
     // --- 返信メッセージの作成 ---
     await message.reply({
-      content: `ボットは ${formattedStartupTime} に起動しました。\n稼働時間: ${uptimeString} (<t:${startupTime}:R>)`,
+      content: `ボットは ${formattedStartupTime} に起動しました。\n稼働時間: ${uptimeString} (<t:${startupTime.getTime()}:R>)`,
       allowedMentions: { parse: [] }
     });
   },
