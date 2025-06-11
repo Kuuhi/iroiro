@@ -77,7 +77,7 @@ function mathEvaluate(expression) {
 const prefix = "e+"
 
 client.on('messageCreate', async message => {
-  //command
+  //command 
   if (!message.author.bot && message.content.startsWith(prefix)) {
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -85,7 +85,14 @@ client.on('messageCreate', async message => {
 
     const command = client.commands.get(commandName);
 
-    if (!command) return message.reply({ content: "コマンドが見つかりませんでした", allowedMentions: { parent: [] } });
+     if (!command) {
+        command = client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+    }
+
+    if (!command) {
+        return message.reply({ content: "コマンドが見つかりませんでした", allowedMentions: { parent: [] } });
+    }
+
 
     try {
       await command.execute(client, message, args);

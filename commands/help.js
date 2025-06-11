@@ -3,6 +3,7 @@ module.exports = {
     name: 'help',
     description: '利用可能なコマンドを表示します',
   },
+  aliases: ['?'],
 
   async execute(client, message, args) {
     const { commands } = message.client;
