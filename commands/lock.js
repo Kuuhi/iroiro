@@ -12,6 +12,7 @@ module.exports = {
         allowedMentions: { parse: [] }
       })
     }
+    
     if (message.channel.isThread()) {
       await message.channel.setLocked(true);
       await message.react("✅")
